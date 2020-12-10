@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 110 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-352,-9)">
+        <g id="c2" transform="matrix(1.1,0,0,0.1,352,9)">
+            <rect x="0" y="0" width="100" height="100" style="fill:none;"/>
+            <g transform="matrix(0.681818,0,0,2.1,5.68434e-14,-20)">
+                <g transform="matrix(10.8889,0,0,3.1746,-47.7778,-7.93651)">
+                    <path d="M17,10C17,8.344 16.89,7 16.755,7L5.245,7C5.11,7 5,8.344 5,10L5,16C5,17.656 5.11,19 5.245,19L16.755,19C16.89,19 17,17.656 17,16L17,10Z" style="fill:rgb(73,73,73);"/>
+                </g>
+                <g transform="matrix(0.439254,0,0,1.56877,-10.3608,22.2042)">
+                    <text x="57.089px" y="5.462px" style="font-family:'MicrosoftSansSerif', 'Microsoft Sans Serif', sans-serif;font-size:6.324px;fill:rgb(171,171,171);">df = df.dropna(how = &apos;any&apos;, axis = 0)   # remove column that have missing value</text>
+                    <text x="57.089px" y="13.051px" style="font-family:'MicrosoftSansSerif', 'Microsoft Sans Serif', sans-serif;font-size:6.324px;fill:rgb(171,171,171);">df.isna().sum()</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
