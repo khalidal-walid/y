@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Fake Taxi</title>
+  <title>Fake Job Advertisement Detection</title>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
@@ -46,21 +46,18 @@
 								We start the data analysis by looking for missing values and handle them. The dataset we used is highly unbalanced. It is because of missing values due to the fact that fraudsters was not doing their job well to disguise themselves. 
 							</p>
 							<img src="./c1.svg" alt="" />
-							<img src="./1.svg" alt="" />
 						</div>
 						<div>
 							<p class="text-lg">
 								To solve this issues, we decide to analyse data that contained all significant information. Then, we trained our cleaned dataset with two different classification models. 
 							</p>
 							<img src="./c2.svg" alt="" />
-							<img src="./2.svg" alt="" />
 						</div>
 						<div>
 							<p class="text-lg">
 								After we do data cleaning, our new dataset consists of 774 columns. We would like to start analysing with the target variable (fraudulent):
 							</p>
 							<img src="./c3.svg" alt="" />
-							<img src="./3.svg" alt="" />
 							<p class="text-lg">
 								Target variable has imbalanced class distribution. Positive class (fraudulent = 0) is significantly higher that negative class (fraudulent = 1). The imbalanced class distributions can influence the performance of our models negatively. 
 							</p>
@@ -70,7 +67,6 @@
 								It is beneficial to explore our variables before trying to build a model. Firstly, we discover the variables that only have two values or binominal attributes.
 							</p>
 							<img src="./c4.svg" alt="" />
-							<img src="./4.svg" alt="" />
 							<p class="text-lg">
 								The remaining categorical variables that have more than two values is also called as polynominal attributes.
 							</p>
@@ -80,7 +76,6 @@
 								<b>Binary Categorical Variables</b>
 							</p>
 							<img src="./c5.svg" alt="" />
-							<img src="./5.svg" alt="" />
 							<p class="text-lg">
 								There is a high imbalance in “telecommuting” and “has_company_logo” variables. Most of the job advertisements have a company logo and similarly, true for telecommuting positions. 
 							</p>
@@ -90,27 +85,15 @@
 								It is better to check how the target variable (fraudulent) changes according to the binary variables. 
 							</p>
 							<img src="./c6.svg" alt="" />
-							<img src="./6.svg" alt="" />
 							<p class="text-lg">
 								From the analysis above, it shows the binary variables have an effect on the target variable. 
 							</p>
 						</div>
-						<!-- <div>
-							<p class="text-lg">
-								<b>Polynominal Categorical Variables</b>
-							</p>
-							<p class="text-lg">
-								There are 14 variables that includes in this category. But, we can only show the analysis of three variables only which are “employment_type”, “required_experiment” and “required_education”. 
-							</p>
-							<img src="./c7.svg" alt="" />
-							<img src="./7.svg" alt="" />
-						</div> -->
 						<div>
 							<p class="text-lg">
-								There are 14 variables that includes in this category. But, we can only show the analysis of three variables only which are “employment_type”, “required_experiment” and “required_education”. <br/><br/>Now, we can check the influence of polynominal variables towards our target variable. 
+								<b>Polynominal Categorical Variables</b><br><br>There are 14 variables that includes in this category. But, we can only show the analysis of three variables only which are “employment_type”, “required_experiment” and “required_education”. <br/><br/>Now, we can check the influence of polynominal variables towards our target variable. 
 							</p>
 							<img src="./c8.svg" alt="" />
-							<img src="./8.svg" alt="" />
 							<p class="text-lg">
 								For other variables, we cannot show the analysis because of too many different input by every variables.
 							</p>
@@ -120,11 +103,7 @@
 								<b>Conclusion</b>
 							</p>
 							<p class="text-lg">
-								For further anallysis, we will continue the analysis using RapidMiner by calculating the influence of this variable towards our target variables.
-							</p>
-							<img src="./ss.png" alt="" />
-							<p class="text-lg">
-								Based on the analysis, we decided to exclude “title”, “has_company_logo” and “employment_type” from our model. From the analysis, we can see that “title” will not be used because of higher number of ID-ness. It shows that each title only exist once in the by the entries.   
+								From the explatorarory data analysis, we decide to not exclude any variables. It is because, for every variables, it will bring impact for our model. To continue our analysis, we will use RapidMiner. 
 							</p>
 						</div>
 					</div>
