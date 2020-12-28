@@ -1,7 +1,8 @@
 /* Global Styles */
 :root {
-	--primary-color: #e50914;
-	--dark-color: #141414;
+	--primary-color: #FC9700;
+	/* --dark-color: #141414; */
+	/* --dark-color: #25305E */
 	--light-color: #f4f4f4;
 }
 
@@ -14,7 +15,7 @@
 body {
 	font-family: 'Inter', sans-serif;
 	-webkit-font-smoothing: antialiased;
-	background: #000;
+	background: #25305E;
 	color: #999;
 }
 
@@ -46,35 +47,24 @@ img {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	background: url('./bg.jpg') no-repeat center center/cover;
-}
-
-.showcase::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	background: rgba(0, 0, 0, 0.6);
-	box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000;
+	background-color: #25305E;
+	/* background: url('./bg.jpg') no-repeat center center/cover; */
 }
 
 .showcase-content {
 	position: relative;
-	z-index: 2;
 	width: 80%;
 	margin: auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	/* justify-content: center; */
+	/* align-items: center; */
 	/* text-align: center; */
 	margin: 7rem;
 }
 
 .showcase-content h1 {
+	color: #fff;
 	font-weight: 700;
 	font-size: 3rem;
 	line-height: 1.1;
@@ -91,7 +81,7 @@ img {
 
 /* Tabs */
 .tabs {
-	background: var(--dark-color);
+	background-color: #323E70;
 	padding-top: 1rem;
 	border-bottom: 3px solid #3d3d3d;
 	border-right: none;
@@ -113,10 +103,11 @@ img {
 
 .tabs .container > div {
 	padding: 1.5rem 0;
+	color: #fff;
 }
 
 .tabs .container > div:hover {
-	color: #fff;
+	color: lightgrey;
 	cursor: pointer;
 }
 
@@ -127,7 +118,7 @@ img {
 /* Tab Content */
 .tab-content {
 	padding: 3rem 0;
-	background: #000;
+	background-color: #25305E;
 	color: #fff;
 }
 
