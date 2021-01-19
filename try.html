@@ -3,430 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <link rel="stylesheet" href="try.css">
-  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="try.js"></script>
   <title>ml</title>
 </head>
 <body>
-  <div class="header">
+  <div class="container">
     <div class="wrapper">
       <div class="left-header">
         <h1>Fake Job Advertisement <br>Detection</h1>
         <h2>Don’t be a victim of fake job offers</h2>
-        <!-- <img src="./image/Saly-11.png" alt=""> -->
-        <p>Nowadays, people are becoming more dependent on technology. Most of critical procedures of company are already conducted through Software as a Service (SaaS) products. It also involves the hiring process in company. Before this, company use to print out the job advertisement and stick in on the wall in certain area. The disadvantage of this method is company cannot approach future workers that live far away from their company that have the ability to contribute to their company. <br><br>
-  
-          But, the method has changes throughout the rapid development of technology. Hiring company can publish their job advertisement through any job pportal or their own website. On the downside, this method has attracted the interest of scammers. In most cases, the scammers will disguise themselves from the company to get the information of the job seekers. This problem may jeopardizes job seekers’ privacy and harm credibility of company. </p>
       </div>
       <div class="right-header">
         <img src="./image/Saly-11.png" alt="">
-        <!-- <img src="./image/Saly-10.png" alt=""> -->
       </div>
     </div>
-  </div>
 
-  <div class="ps">
-    <div class="content">
-      <div class="content-victim">
-        <h1>Victim</h1>
-        <form>
-          <label><input type="radio" name="dataset" id="dataset" value="total" checked> By Gender</label>
-          <label><input type="radio" name="dataset" id="dataset" value="option1"> By Age group</label>
-          <!-- <label><input type="radio" name="dataset" id="dataset" value="option2"> By Age</label> -->
-        </form>
-        <script>
-          d3.select("input[value=\"total\"]").property("checked", true);
-      
-          var svg = d3.select(".content-victim")
-            .append("svg")
-            .append("g")
-          
-          svg.append("g")
-            .attr("class", "slices");
-          svg.append("g")
-            .attr("class", "labelName");
-          svg.append("g")
-            .attr("class", "labelValue");
-          svg.append("g")
-            .attr("class", "lines");
-          
-          var width = 1350,
-              height = 450,
-              radius = Math.min(width, height) / 2;
-          
-          var pie = d3.layout.pie()
-            .sort(null)
-            .value(function(d) {
-              console.log(d);
-              return d.value;
-            });
-          
-          var arc = d3.svg.arc()
-            .outerRadius(radius * 0.8)
-            .innerRadius(radius * 0.4);
-          
-          var outerArc = d3.svg.arc()
-            .innerRadius(radius * 0.9)
-            .outerRadius(radius * 0.9);
-          
-          var legendRectSize = radius * 0.05;
-          var legendSpacing = radius * 0.02;
-          
-          var div = d3.select("body").append("div").attr("class", "toolTip");
-          
-          svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-          
-          var colorRange = d3.scale.category20();
-          var color = d3.scale.ordinal()
-            .range(colorRange.range());
-          
-          
-          datasetTotal = [
-                  {label:"X", value:0.4},
-                  {label:"Female", value:64.4}, 
-                  {label:"Male", value:35.2}
-                  // {label:"Category 4", value:17},
-                  // {label:"Category 5", value:19},
-                  // {label:"Category 6", value:27}
-                  ];
-          
-          datasetOption1 = [
-                  {label:"Under 18", value:2.07}, 
-                  {label:"18 to 24", value:15.86}, 
-                  {label:"25 to 34", value:28.97},
-                  {label:"35 to 44", value:20.69},
-                  {label:"45 to 54", value:15.17},
-                  {label:"55 to 64", value:14.48},
-                  {label:"Over 65", value:2.76}
-                  ];
-          
-          // datasetOption2 = [
-          //     {label:"Category 1", value:10}, 
-          //         {label:"Category 2", value:20}, 
-          //         {label:"Category 3", value:30},
-          //         {label:"Category 4", value:5},
-          //         {label:"Category 5", value:12},
-          //         {label:"Category 6", value:23}
-          //         ];
-          
-          change(datasetTotal);
-          
-          
-          d3.selectAll("input")
-            .on("change", selectDataset);
-            
-          function selectDataset()
-          {
-            var value = this.value;
-            if (value == "total")
-            {
-              change(datasetTotal);
-            }
-            else if (value == "option1")
-            {
-              change(datasetOption1);
-            }
-            // else if (value == "option2")
-            // {
-            //   change(datasetOption2);
-            // }
-          }
-          
-          function change(data) {
-          
-            /* ------- PIE SLICES -------*/
-            var slice = svg.select(".slices").selectAll("path.slice")
-                  .data(pie(data), function(d){ return d.data.label });
-          
-              slice.enter()
-                  .insert("path")
-                  .style("fill", function(d) { return color(d.data.label); })
-                  .style("opacity", 0.7)
-                  .attr("class", "slice");
-          
-              slice
-                  .transition().duration(1000)
-                  .attrTween("d", function(d) {
-                      this._current = this._current || d;
-                      var interpolate = d3.interpolate(this._current, d);
-                      this._current = interpolate(0);
-                      return function(t) {
-                          return arc(interpolate(t));
-                      };
-                  })
-              slice
-                  .on("mousemove", function(d){
-                      div.style("left", d3.event.pageX+10+"px");
-                      div.style("top", d3.event.pageY-25+"px");
-                      div.style("display", "inline-block");
-                      div.html((d.data.label)+"<br>"+(d.data.value)+"%");
-                  });
-              slice
-                  .on("mouseout", function(d){
-                      div.style("display", "none");
-                  });
-          
-              slice.exit()
-                  .remove();
-          
-              var legend = svg.selectAll('.legend')
-                  .data(color.domain())
-                  .enter()
-                  .append('g')
-                  .attr('class', 'legend')
-                  .attr('transform', function(d, i) {
-                      var height = legendRectSize + legendSpacing;
-                      var offset =  height * color.domain().length / 2;
-                      var horz = -3 * legendRectSize;
-                      var vert = i * height - offset;
-                      return 'translate(' + horz + ',' + vert + ')';
-                  });
-          
-              // legend.append('rect')
-              //     .attr('width', legendRectSize)
-              //     .attr('height', legendRectSize)
-              //     .style('fill', color)
-              //     .style('stroke', color);
-          
-              // legend.append('text')
-              //     .attr('x', legendRectSize + legendSpacing)
-              //     .attr('y', legendRectSize - legendSpacing)
-              //     .text(function(d) { return d; })
-              //     .attr("fill", "white");
-                  
-          
-              /* ------- TEXT LABELS -------*/
-          
-              var text = svg.select(".labelName").selectAll("text")
-                  .data(pie(data), function(d){ return d.data.label });
-          
-              text.enter()
-                  .append("text")
-                  .attr("dy", ".35em")
-                  .attr("fill", "white")
-                  .text(function(d) {
-                      return (d.data.label+": "+d.value+"%");
-                  });
-          
-              function midAngle(d){
-                  return d.startAngle + (d.endAngle - d.startAngle)/2;
-              }
-          
-              text
-                  .transition().duration(1000)
-                  .attrTween("transform", function(d) {
-                console.log(d);
-                      this._current = this._current || d;
-                      var interpolate = d3.interpolate(this._current, d);
-                      this._current = interpolate(0);
-                      return function(t) {
-                          var d2 = interpolate(t);
-                          var pos = outerArc.centroid(d2);
-                          pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-                          return "translate("+ pos +")";
-                      };
-                  })
-                  .styleTween("text-anchor", function(d){
-                      this._current = this._current || d;
-                      var interpolate = d3.interpolate(this._current, d);
-                      this._current = interpolate(0);
-                      return function(t) {
-                          var d2 = interpolate(t);
-                          return midAngle(d2) < Math.PI ? "start":"end";
-                      };
-                  })
-                  .text(function(d) {
-                      return (d.data.label+": "+d.value+"%");
-                  });
-          
-          
-              text.exit()
-                  .remove();
-          
-              /* ------- SLICE TO TEXT POLYLINES -------*/
-          
-              var polyline = svg.select(".lines").selectAll("polyline")
-                  .data(pie(data), function(d){ return d.data.label });
-          
-              polyline.enter()
-                  .append("polyline");
-          
-              polyline.transition().duration(1000)
-                  .attrTween("points", function(d){
-                      this._current = this._current || d;
-                      var interpolate = d3.interpolate(this._current, d);
-                      this._current = interpolate(0);
-                      return function(t) {
-                          var d2 = interpolate(t);
-                          var pos = outerArc.centroid(d2);
-                          pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
-                          return [arc.centroid(d2), outerArc.centroid(d2), pos];
-                      };
-                  });
-          
-              polyline.exit()
-                  .remove();
-          };
-      
-        </script>
+    <div class="line"></div>
+
+    <div class="ps">
+      <h1>Problem Statement</h1>
+    </div>
+    
+    <div class="ps-content">
+      <div class="content1">
+        <h3>Amount Lost</h3>
+        <h2>$1 310 201</h2>
       </div>
-      <div class="content-method">
-        <h1>Delivary Method</h1>
-        <script id='codeExcute'>
-          
-          var url = 'data.csv'
-          
-          d3.csv(url, function(error, data){
-              data.forEach(function (d) {
-                d.report = +d.report;
-              });
-              // console.log(data)
-              var margin = {top: 30, bottom: 50, left: 450, right: 30}, axisPadding = 10;
-              var Width = 500, Height = 300;
-              var svgWidth = Width + margin.left + margin.right,
-                  svgHeight = Height + margin.top + margin.bottom;
-              var maxReport = d3.max(data, function(d){ return d.report; });
-              
-              
-              // define scales and axises
-              var xScale = d3.scale.ordinal()
-                  .domain(data.map(function(d){ return d.method; }))
-                  .rangeBands([0, Width], 0.1);
-              var yScale = d3.scale.linear()
-                  .domain([0, maxReport])
-                  .range([0, Height]);
-              var color = d3.scale.category10();
-              
-              var xAxis = d3.svg.axis()
-                  .scale(xScale)
-                  .tickSize(0,0)
-                  .orient('bottom');
-              var yAxis = d3.svg.axis()
-                  .scale(yScale.copy().domain([maxReport, 0]))
-                  .tickSize(6,0)
-                  .ticks(5)
-                  .orient('left');
-              
-              // create a svg canvas
-              var svg = d3.select('.content-method')
-                  .append('svg')
-                  .attr({width: svgWidth, height: svgHeight})
-              
-              
-              // Drawing for axises
-              var xGroup = svg.append('g')
-                  .attr('class', 'xGroup')
-                  .attr('transform', 'translate(' + [margin.left, margin.top + Height + axisPadding] + ')')
-                  .attr('fill', 'white' );
-              xGroup.call(xAxis);
-              styleAxis(xGroup);
-              var yGroup = svg.append('g')
-                  .attr('class', 'yGroup')
-                  .attr('transform', 'translate(' + [margin.left - axisPadding, margin.top] + ')')
-                  .attr('fill', 'white' );
-              yGroup.call(yAxis);
-              styleAxis(yGroup);
-          
-          
-              // Label layer
-              // var label = svg.append('g')
-              //     .attr('transform', 'translate(' + [margin.left - axisPadding, margin.top] + ')');
-               
-              // label.append('text')
-              //     .text('report [%]')
-              //     .attr('transform', 'rotate(-90)')
-              //     .attr({
-              //         'text-anchor': 'start',
-              //         x: -75,
-              //         y: 20,
-              //     })
-              //     .attr('fill', 'white')
-
-              // label.append('text')
-              //     .text('Bar Chart with Tooltip')
-              //     .attr('transform', 'translate(' + [Width / 2, - margin.top / 2] + ')')
-              //     .attr({
-              //         'text-anchor': 'middle',
-              //         'font-size': '1.5em',
-              //         fill: 'steelblue',
-              //     });
-          
-          
-              // Drawing for graph body
-              var graph = svg.append('g')
-                  .attr('class', 'graph')
-                  .attr('transform', 'translate(' + [margin.left, margin.top + Height] + ')');
-              var bars = graph.selectAll('g')
-                  .data(data)
-                  .enter()
-                  .append('g')
-                  .attr('transform', function(d,i){ return 'translate(' + [xScale(d.method), -1 * yScale(d.report)] + ')'; });
-              bars.append('rect')
-                  .each(function(d,i){
-                      d3.select(this).attr({
-                          fill: color.range()[i],
-                          // fill: 'white',
-                          width: xScale.rangeBand(),
-                          height: yScale(d.report),
-                      })
-                  })
-                  // .on('mouseover', mouseover)
-                  // .on('mousemove', mousemove)
-                  // .on('mouseout', mouseout);
-              
-              bars.append('text')
-              .text(function(d){ return d.report; })
-              .each(function(d,i){
-                  d3.select(this).attr({
-                      // fill: color.range()[i],
-                      fill: 'white',
-                      stroke: 'none',
-                      x: xScale.rangeBand() / 2,
-                      y: -5,
-                      'text-anchor': 'middle',
-                  });
-              })
-              
-              
-              
-              // tooltips
-              // var div = d3.select('.content-method').append('div')
-              //     .attr('class', 'tooltip')
-              //     .style('display', 'none');
-          //     function mouseover(){
-          //         div.style('display', 'inline');
-          //     }
-          //     function mousemove(){
-          //         var d = d3.select(this).data()[0]
-          //         div
-          //             .html(d.age + '<hr/>' + d.report)
-          //             .style('left', (d3.event.pageX - 34) + 'px')
-          //             .style('top', (d3.event.pageY - 12) + 'px');
-          //     }
-          //     function mouseout(){
-          //         div.style('display', 'none');
-          //     }
-           })
-          
-          
-          function styleAxis(axis){
-              // style path
-              axis.select('.domain').attr({
-                  fill: 'none',
-                  stroke: '#888',
-                  'stroke-width': 1
-              });
-              // style tick
-              axis.selectAll('.tick line').attr({
-                  stroke: '#fff',
-                  'stroke-width': 1,
-              })
-          }
-          
-        </script>
+      <div class="content2">
+        <h3>Number of Reports</h3>
+        <h2>2 934</h2>
+      </div>
+      <div class="content3">
+        <h3>Reports with financial losses</h3>
+        <h2>10.0%</h2>
       </div>
     </div>
+
+    <div class="content4">
+      <h3>Jobs & Employment Scam Stats for 2020</h3>
+        <div id='vis-container'></div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="obj">
+      <h1>Objective</h1>
+      <ol>
+        <h2><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li></h2><br>
+        <h2><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li></h2><br>
+        <h2><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li></h2>
+      </ol>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="ml">
+      <h1>Descriptive Analysis</h1>
+    </div>
+
+    <!-- <section class="tabs">
+			<div class="option">
+				<div id="tab-1" class="tab-item tab-border">
+					<p class="hide-sm">Dataset Description</p>
+				</div>
+				<div id="tab-1" class="tab-item tab-border">
+					<p class="hide-sm">Descriptive Analysis</p>
+				</div>
+				<div id="tab-2" class="tab-item">
+					<p class="hide-sm">Predictive Analysis</p>
+				</div>
+			</div>
+    </section> -->
+    
+    <section class="tab-content">
+			<div class="option">
+
+				<!-- Tab Content 1 -->
+				<div id="tab-2-content" class="tab-content-item show">
+					<div class="tab-2-content-top">
+						<div>
+							<p class="text-lg">
+								In these part we will see how impactful is one attributes toward fraudulent. The first part is data cleansing as shown below.
+							</p>
+							<img src="./image/1.png" />
+							<p class="text-dark">
+								Our dataset
+							</p>
+						</div>
+
+						<div>
+							<img src="./image/2.png" alt="" />
+							<p class="text-dark">
+								Fake Job Posting table with attributes
+							</p>
+						</div>
+
+						<div>
+              <p class="text-lg">
+                First we will separate data based on their percentage on missing value. If the missing value is higher than 50% we consider it as irrelevance data such as location and department so we remove it from the table. <br><br>
+                After that we will remove table that have description that cannot be used as nominal or binomial data. The data cannot be use because the difference between each data is very different and cannot be used as data. Such as job_id, title, salary_range, company_profile, description, requirement, benefits.<br><br>
+                Now all data has been clean we will now use PowerBI as our dashboard to visualize the fake job posting data.<br><br>
+              </p>
+              <img src="./image/3.png" alt="" />
+							<p class="text-dark">
+								Data in Power BI
+							</p>
+              <p class="text-lg">
+                The data use is telecommuting, has_company_logo, has_questions, employment_type, required_experience, required_education, industry, function, fraudulent. <br><br>
+                Some of the attribute has missing value but not more than 50% of the whole data and the nominal is not very difference from each other.
+              </p>
+						</div>
+						
+					</div>
+
+					<div class="tab-2-content-bottom">
+
+            <div>
+							<img src="./image/4.png" alt="" />
+							<p class="text-dark">
+								Donut chart show how much is fraudulent which is 1 consider as fraudulent
+              </p>
+              <p class="text-lg">
+                The chart show that there is about 870 fraudulent has been spotted.
+              </p>
+            </div>
+            <div>
+							<img src="./image/5.png" alt="" />
+							<p class="text-dark">
+                Fraudulent based on employment_type bar chart
+              </p>
+              <p class="text-lg">
+                Based on this chart its show that Full time, No description and part time is the top three cause of fraudulent.
+              </p>
+            </div>
+            <div>
+							<img src="./image/6.png" alt="" />
+							<p class="text-dark">
+                Based on has_company_logo
+              </p>
+              <p class="text-lg">
+                The company with missing value has the highest fraudulent with Oil & Energy at 2nd place while Accounting at 3rd place.
+              </p>
+            </div>
+            <div>
+							<img src="./image/7.png" alt="" />
+							<p class="text-dark">
+                Based on required_education using Funnel Chart
+              </p>
+              <p class="text-lg">
+                For required we use Funnel Chart that show that missing value still the most impactful and cause fraudulent as a job posting.
+              </p>
+            </div>
+            <div>
+							<img src="./image/8.png" alt="" />
+							<p class="text-dark">
+                Based on required_experience using TreeMap
+              </p>
+              <p class="text-lg">
+                This show by using Treemap missing value still give the biggest impact in fraudulent with entry level and mid-senior level at 2nd and 3rd place.
+              </p>
+            </div>
+            <div>
+							<img src="./image/9.png" alt="" />
+							<p class="text-dark">
+                Based on function using Treemap
+              </p>
+              <p class="text-lg">
+                The function also show missing value give the most fraudulent in a job posting with Administrative and engineering.
+              </p>
+            </div>
+					</div>
+
+					<div class="tab-2-content-top">
+						<div>
+							<p class="text-lg">
+								<br><br><br><br><b>Conclusion</b><br><br>
+								Based on our descriptive analysis it shows that missing value is a huge contribution to a fraudulent in a job posting. This make us consider it as a value when going into predictive analysis.<br><br>
+								We can conclude that if a job hunter want to search for company to work for make sure it have all description provided before accepting the job. 
+							</p>
+					</div>
+				</div>
+				
+		</section>
+		<div class="line"></div>
+
+    <div class="ml">
+      <h1>Predictive Analysis</h1>
+		</div>
+		
+    <section class="tab-content">
+			<div class="option">
+
+				<!-- Tab Content 1 -->
+				<div id="tab-2-content" class="tab-content-item show">
+					<div class="tab-2-content-top">
+						<div>
+							<p class="text-lg">
+								The first machine learning model is Decision Tree 
+							</p>
+							<img src="./image/10.png" />
+							<img src="./image/11.png" />
+							<p class="text-lg">
+								<br>The average accuracy we get is range at 97.33% that is quiet high.
+							</p>
+						</div>
+
+						<div>
+							<p class="text-lg">
+								Now we test with Naïve Bayesian Model 
+							</p>
+							<img src="./image/12.png" />
+							<img src="./image/13.png" />
+							<p class="text-lg">
+								<br>As shown in picture the Naïve Bayesian model give an accuracy at 94.30% that is consider accurate but not as accurate as Decision Tree Model.
+							</p>
+						</div>
+
+						<div>
+							<p class="text-lg">
+								The last one is using the Neural Network Model  
+							</p>
+							<img src="./image/12.png" />
+							<img src="./image/13.png" />
+							<p class="text-lg">
+								<br>Neural Network have little bit higher accuracy than Decision Tree Model that is 97.47% which is only 0.14% higher than Decision Tree Model.<br><br>
+
+								This make us decide to use Neural Network to predict any fraudulent in job posting to make sure it is not fake.<br><br>
+
+								<b>Summary</b><br><br>
+
+								We learn that even though all of them are machine learning model but each model give out difference output based on attribute provided. This could mean that each model react differently in different data provided. So we need to pick the best accuracy from the model been test on before we test on real time data to make sure it give out the most accurate result. This is very important if something need a real time accuracy such as air traffic to make sure no airplanes collide or the airplanes did not land accurately that could lead to fatal for people in the airplane and also people on the ground.
+							</p>
+						</div>
+						
+					</div>
+
+				</div>
+				
+		</section>
+
   </div>
+
+
+  <script src="script.js"></script>
 </body>
 </html>
