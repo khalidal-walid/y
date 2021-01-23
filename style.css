@@ -116,6 +116,8 @@ img {
 
   #vis-container {
     color: var(--tertiary-color);
+    width: 100%;
+    /* background-color: blueviolet; */
   }
 
   select {
