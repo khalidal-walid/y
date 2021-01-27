@@ -25,6 +25,10 @@ ol {
   font-size: smaller;
 }
 
+iframe {
+  margin-left: 21em;
+}
+
 body {
   /* font-family: 'Inter', sans-serif; */
   font-family: Tahoma, Verdana, sans-serif;
@@ -200,6 +204,7 @@ img {
     text-align: center;
   }
 
+  
 
 
 
